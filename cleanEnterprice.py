@@ -69,7 +69,7 @@ for indx in range(origin_nrows):
 
     # origin_sheet.cell(row_index, 26).value
 print(type(origin_ent_names))
-#origin_ent_names.pop('无')
+# origin_ent_names.pop('无')
 print(len(origin_ent_names))
 print(origin_ent_names.count('无'))
 print(len(list(set(origin_ent_names))))
