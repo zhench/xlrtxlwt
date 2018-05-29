@@ -2,9 +2,9 @@ import xlrd
 import os
 import shutil
 
-rootdir = '.\白涧镇'
-ent_path = '.\\白涧镇0528.xls'
-dstdir = '.\白涧镇筛选'
+rootdir = '..\data\下仓'
+ent_path = '..\data\\下仓镇0529.xlsx'
+dstdir = '..\data\下仓镇筛选'
 dst_xls_dir = os.path.join(dstdir, 'excel')
 if os.path.exists(dstdir):
     print('删除' + dstdir)
@@ -18,18 +18,20 @@ ent_boot = xlrd.open_workbook(ent_path)
 ent_sheet = ent_boot.sheets()[0]
 
 nrows = ent_sheet.nrows
-ent_names = ent_sheet.col_values(3)
+ent_names = ent_sheet.col_values(30)
 
 print('行数为' + str(nrows))
 listdir = os.listdir(rootdir)
 
 print('开始复制...')
+index = 0
 for i in range(0, len(listdir)):
     path = os.path.join(rootdir, listdir[i])
     if not os.path.isfile(path) and listdir[i] in ent_names:
         ent_copy_path = os.path.join(dstdir, listdir[i])
         shutil.copytree(path, ent_copy_path)
-        print(i)
+        index += 1
+        print(str(index) + listdir[i])
         list_copy_ent_sub = os.listdir(ent_copy_path)
         for j in range(0, len(list_copy_ent_sub)):
             if 'xlsx' in list_copy_ent_sub[j] or 'xls' in list_copy_ent_sub[j]:
